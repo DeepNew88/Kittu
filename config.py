@@ -16,6 +16,7 @@ class Config:
 
         # API KEY - here
         API_KEY = getenv("API_KEY", None) #for 
+        DOWNLOADS_DIR = "downloads"
 
         self.LOGGER_ID = int(getenv("LOGGER_ID", 0))
         self.OWNER_ID = int(getenv("OWNER_ID", 0))
