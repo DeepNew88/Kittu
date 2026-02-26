@@ -102,14 +102,14 @@ class Thumbnail:
             artist = (song.channel_name or "Unknown Artist")[:40]
 
             draw.text(
-                (520, 140),
+                (520, 200),
                 title,
                 fill="white",
                 font=FONTS["title"],
             )
 
             draw.text(
-                (520, 180),
+                (520, 250),
                 artist,
                 fill=(210, 210, 210),
                 font=FONTS["artist"],
