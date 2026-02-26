@@ -61,7 +61,7 @@ class Thumbnail:
             tint = Image.new("RGBA", (width, height), (30, 20, 20, 120))
             bg = Image.alpha_composite(bg.convert("RGBA"), tint)
 
-            # ===== PANEL SIZE (TALLER + BALANCED) =====
+            # ===== PANEL SIZE =====
             panel_w, panel_h = 980, 600
             panel_x = (width - panel_w) // 2
             panel_y = (height - panel_h) // 2
@@ -119,38 +119,6 @@ class Thumbnail:
                 artist,
                 fill=(210, 210, 210),
                 font=FONTS["artist"],
-            )
-
-            # ===== MAIN PROGRESS =====
-            bar_x1 = panel_x + 460
-            bar_x2 = panel_x + 940
-            bar_y = panel_y + 310
-
-            draw.line(
-                [(bar_x1, bar_y), (bar_x2, bar_y)],
-                fill=(180, 180, 180),
-                width=7,
-            )
-
-            progress = bar_x1 + 280
-            draw.line(
-                [(bar_x1, bar_y), (progress, bar_y)],
-                fill="white",
-                width=7,
-            )
-
-            draw.text(
-                (bar_x1, bar_y - 35),
-                "0:24",
-                fill="white",
-                font=FONTS["small"],
-            )
-
-            draw.text(
-                (bar_x2 - 70, bar_y - 35),
-                song.duration or "--:--",
-                fill="white",
-                font=FONTS["small"],
             )
 
             # ===== CONTROLS =====
