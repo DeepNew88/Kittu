@@ -15,7 +15,7 @@ from py_yt import Playlist, VideosSearch
 from anony import logger
 from anony.helpers import Track, utils
 from config import API_URL
-from Anony.helpers._httpx import HttpxClient
+from anony.helpers._httpx import HttpxClient
 
 
 class YouTube:
