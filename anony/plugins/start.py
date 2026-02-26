@@ -30,7 +30,7 @@ async def start(_, message: types.Message):
 
     private = message.chat.type == enums.ChatType.PRIVATE
     _text = (
-        message.lang["start_pm"].format(message.from_user.first_name, app.name)
+        message.lang["start_pm"].format(message.from_user.mention, app.name)
         if private
         else message.lang["start_gp"].format(app.name)
     )
