@@ -17,7 +17,7 @@ from anony.helpers import Track
 def load_fonts():
     try:
         return {
-            "title": ImageFont.truetype("anony/helpers/Raleway-Bold.ttf", 42),
+            "title": ImageFont.truetype("anony/helpers/Raleway-Bold.ttf", 48),  # Increased
             "artist": ImageFont.truetype("anony/helpers/Inter-Light.ttf", 28),
             "small": ImageFont.truetype("anony/helpers/Inter-Light.ttf", 22),
         }
@@ -61,12 +61,12 @@ class Thumbnail:
             dark_overlay = Image.new("RGBA", (width, height), (0, 0, 0, 160))
             bg = Image.alpha_composite(bg.convert("RGBA"), dark_overlay)
 
-            # ===== SAME PANEL FRAME AS OLD CODE =====
+            # ===== PANEL FRAME =====
             panel_x, panel_y = 305, 125
             panel_w = 975 - 305
             panel_h = 595 - 125
 
-            # ===== PREMIUM SHADOW =====
+            # ===== SHADOW =====
             shadow = Image.new("RGBA", (panel_w, panel_h), (0, 0, 0, 255))
             shadow = shadow.filter(ImageFilter.GaussianBlur(40))
             bg.paste(shadow, (panel_x + 15, panel_y + 25), shadow)
@@ -84,7 +84,7 @@ class Thumbnail:
 
             draw = ImageDraw.Draw(bg)
 
-            # ===== COVER (SAME SIZE AS OLD) =====
+            # ===== COVER =====
             cover = ImageOps.fit(
                 thumb, (184, 184), Image.Resampling.LANCZOS
             )
@@ -97,25 +97,25 @@ class Thumbnail:
 
             bg.paste(cover, (325, 155), cover)
 
-            # ===== TEXT (SAME POSITION) =====
+            # ===== TEXT (Improved Spacing) =====
             title = (song.title or "Unknown Title")[:45]
             artist = (song.channel_name or "Unknown Artist")[:40]
 
             draw.text(
-                (540, 155),
+                (540, 165),
                 title,
                 fill="white",
                 font=FONTS["title"],
             )
 
             draw.text(
-                (540, 200),
+                (540, 220),
                 artist,
                 fill=(210, 210, 210),
                 font=FONTS["artist"],
             )
 
-            # ===== CONTROLS (SAME POSITION) =====
+            # ===== CONTROLS =====
             try:
                 controls = Image.open("anony/assets/controls.png").convert("RGBA")
                 controls = controls.resize((600, 160), Image.Resampling.LANCZOS)
@@ -128,21 +128,21 @@ class Thumbnail:
             except:
                 pass
 
-            # ===== VOLUME BAR (SAME POSITION) =====
-            vol_y = 560
+            # ===== VOLUME BAR (Improved Alignment) =====
+            vol_y = 575
 
             draw.line(
-                [(525, vol_y),
-                 (940, vol_y)],
-                fill=(150, 150, 150),
-                width=6,
+                [(500, vol_y),
+                 (950, vol_y)],
+                fill=(120, 120, 120),
+                width=7,
             )
 
             draw.line(
-                [(525, vol_y),
-                 (750, vol_y)],
-                fill=(230, 230, 230),
-                width=6,
+                [(500, vol_y),
+                 (780, vol_y)],
+                fill=(240, 240, 240),
+                width=7,
             )
 
             bg.save(save_path, "PNG", quality=95)
