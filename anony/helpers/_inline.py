@@ -153,7 +153,7 @@ class Inline:
                 [
                     self.ikb(
                         text=lang["Owner"],
-                        url="https://t.me/APNA_SYSTEM",
+                        url="https://t.me/NannuMusicBot",
                     )
                 ]
             ]
