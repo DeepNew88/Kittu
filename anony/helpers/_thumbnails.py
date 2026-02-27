@@ -61,9 +61,14 @@ class Thumbnail:
 
             width, height = 1280, 720
 
-            # ===== BACKGROUND (STRONG BLUR, NO DARK OVERLAY) =====
+            # ===== BACKGROUND (OLD NATURAL STYLE) =====
             bg = thumb.copy()
-            bg = bg.filter(ImageFilter.GaussianBlur(35))
+            bg = bg.filter(ImageFilter.GaussianBlur(15))
+            bg = ImageEnhance.Brightness(bg).enhance(1.0)
+
+            # Very very light overlay
+            dark_overlay = Image.new("RGBA", (width, height), (0, 0, 0, 8))
+            bg = Image.alpha_composite(bg, dark_overlay)
 
             # ===== PANEL FRAME =====
             panel_margin_x = 220
@@ -75,15 +80,17 @@ class Thumbnail:
             panel_w = width - (panel_margin_x * 2)
             panel_h = height - (panel_margin_y * 2)
 
-            # ===== EXTRA BLUR INSIDE PANEL =====
+            # ===== TRUE TRANSPARENT GLASS =====
+
+            # Blur only inside panel
             panel_area = bg.crop(
                 (panel_x, panel_y, panel_x + panel_w, panel_y + panel_h)
             )
-            panel_area = panel_area.filter(ImageFilter.GaussianBlur(18))
+            panel_area = panel_area.filter(ImageFilter.GaussianBlur(10))
             bg.paste(panel_area, (panel_x, panel_y))
 
-            # ===== DEEP TRANSPARENT GLASS =====
-            glass = Image.new("RGBA", (panel_w, panel_h), (20, 20, 20, 95))
+            # Ultra light transparent layer (almost invisible)
+            glass = Image.new("RGBA", (panel_w, panel_h), (255, 255, 255, 20))
 
             mask = Image.new("L", (panel_w, panel_h), 0)
             ImageDraw.Draw(mask).rounded_rectangle(
