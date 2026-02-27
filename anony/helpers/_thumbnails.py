@@ -94,7 +94,7 @@ class Thumbnail:
             bg.paste(blur_area, (panel_x, panel_y))
 
             # Light grey transparent glass (visible transparency)
-            glass = Image.new("RGBA", (panel_w, panel_h), (60, 60, 60, 85))
+            glass = Image.new("RGBA", (panel_w, panel_h), (60, 60, 60, 30))
 
             mask = Image.new("L", (panel_w, panel_h), 0)
             ImageDraw.Draw(mask).rounded_rectangle(
