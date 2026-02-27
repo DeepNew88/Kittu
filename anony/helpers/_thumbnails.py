@@ -112,6 +112,14 @@ class Thumbnail:
             cover.putalpha(cover_mask)
             bg.paste(cover, (325, 155), cover)
 
+            # ===== SMALL LABEL ABOVE TITLE =====
+            draw.text(
+                (520, 175),
+                "Nancy Music",
+                fill=(200, 200, 200),
+                font=FONTS["small"],
+            )
+
             # ===== TEXT =====
             title = (song.title or "Unknown Title")[:45]
             artist = (song.channel_name or "Unknown Artist")[:40]
@@ -146,7 +154,7 @@ class Thumbnail:
             # ===== END TIME (RIGHT SIDE ONLY) =====
             total_time = getattr(song, "duration", "3:25")
 
-            time_y = 427  # aligned with progress bar
+            time_y = 427
             text_width = draw.textlength(total_time, font=FONTS["small"])
 
             draw.text(
